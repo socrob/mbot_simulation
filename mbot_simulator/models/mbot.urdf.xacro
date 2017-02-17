@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mbot_socrob">
+
+  <xacro:include filename="$(find mbot_simulator)/models/manipulator.urdf.xacro"/>
+  <xacro:include filename="$(find mbot_simulator)/models/monarch.urdf.xacro"/>
+
+  <xacro:property name="pi_2" value="1.57079632679" />
+  <xacro:property name="pi"   value="3.14159265359" />
+
+  <joint name="body_to_arm_struct_joint" type="fixed">
+    <parent link="mbot_body_link"/>
+    <child link="mbot_arm_link"/>
+    <origin xyz="0.04 0.101 0.633" rpy="-${pi_2} ${-pi} 0"/>
+  </joint>
+
+  <joint name="arm_struct_to_cyton_base_joint" type="fixed">
+    <parent link="mbot_arm_link"/>
+    <child link="cyton_gamma_1500_base_link"/>
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 ${-62.0*pi/180.0}"/>
+  </joint>
+
+  <link name="mbot_arm_link">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+               iyy="1.0" iyz="0.0"
+               izz="1.0" />
+    </inertial>
+  </link>
+
+  <link name="hokuyo_front_link">
+   <visual>
+      <geometry>
+        <mesh filename="package://mbot_simulator/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+               iyy="1.0" iyz="0.0"
+               izz="1.0" />
+    </inertial>
+  </link>
+
+  <link name="hokuyo_back_link">
+   <visual>
+      <geometry>
+        <mesh filename="package://mbot_simulator/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+               iyy="1.0" iyz="0.0"
+               izz="1.0" />
+    </inertial>
+  </link>
+
+  <link name="kinect_model_link">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+               iyy="1.0" iyz="0.0"
+               izz="1.0" />
+    </inertial>
+  </link>
+
+  <link name="asus_xtion_model_link">
+    <inertial>
+      <mass value="0.1" />
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+               iyy="1.0" iyz="0.0"
+               izz="1.0" />
+    </inertial>
+  </link>
+
+  <joint name="mbot_to_hokuyo_front_joint" type="fixed">
+    <parent link="mbot_body_link"/>
+    <child link="hokuyo_front_link"/>
+    <origin xyz="0.2895 0 0.1365" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="mbot_to_hokuyo_back_joint" type="fixed">
+    <parent link="mbot_body_link"/>
+    <child link="hokuyo_back_link"/>
+    <origin xyz="-0.275 0 0.145" rpy="${pi} 0 0"/>
+  </joint>
+
+  <joint name="mbot_head_to_kinect_joint" type="fixed">
+    <parent link="mbot_head_link"/>
+    <child link="kinect_model_link"/>
+    <origin xyz="0.155 0 0.92" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="mbot_head_to_asus_xtion_joint" type="fixed">
+    <parent link="mbot_head_link"/>
+    <child link="asus_xtion_model_link"/>
+    <origin xyz="0.135 0 0.78" rpy="0 ${0.25*pi} 0"/>
+  </joint>
+
+</robot>

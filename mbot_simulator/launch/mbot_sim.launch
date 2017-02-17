@@ -1,0 +1,39 @@
+<launch>
+
+	<!-- Initialize an empty gazebo world. -->
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<!-- Use this to specify a different world to interact with:
+		<arg name="world_name" value="$(find cyton_gamma_1500_gazebo)/worlds/cyton_gamma_1500.world"/>
+		-->
+	</include>
+
+	<!-- Load the mbot URDF into the ROS Parameter Server -->
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find mbot_simulator)/models/mbot.urdf.xacro'"/>
+
+	<!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model mbot_socrob -param robot_description -z .2"/>
+
+	<!-- TF hacker for the gazebo TFs -->
+    <node pkg="tf" type="static_transform_publisher" name="tf_create_base_link1" args="0 0 0 0 0 0 /base_footprint /base_link 33.33"/>
+    <node pkg="tf" type="static_transform_publisher" name="tf_create_base_link2" args="0 0 0 0 0 0 /base_link /mbot_base_link 33.33"/>
+
+	<!-- Load joint controller configurations from YAML file to parameter server -->
+    <rosparam file="$(find mbot_simulator)/config/mbot_controller.yaml" command="load"/>
+
+	<!-- load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/mbot_controller"
+	  args="scout_body_to_back_wheel_joint_controller scout_body_to_left_wheel_joint_controller scout_body_to_right_wheel_joint_controller"/>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+		<param name="publish_frequency" type="double" value="30.0"/>
+	</node>
+
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+
+	<rosparam file="$(find mbot_simulator)/config/simulation_omni.yaml" command="load"/>
+
+	<!-- node name="motor_controllers" pkg="mbot_simulator" type="motion_node"/-->
+
+	<!-- <node name="control_translator" pkg="mbot_simulator" type="control_translator"/> -->
+
+</launch>

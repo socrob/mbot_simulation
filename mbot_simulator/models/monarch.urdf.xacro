@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="mbot">
+
+  <xacro:property name="pi_2" value="1.57079632679" />
+
+  <link name="mbot_base_link"/>
+
+  <link name="mbot_body_link">
+   <visual>
+      <geometry>
+        <mesh filename="package://mbot_simulator/meshes/mbot_body.dae"/>
+      </geometry>
+      <origin rpy="${pi_2} 0 ${pi_2}" xyz="0 0 0.025"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://mbot_simulator/meshes/mbot_body.dae"/>
+      </geometry>
+      <origin rpy="${pi_2} 0 ${pi_2}" xyz="0 0 0.025"/>
+    </collision>
+    <inertial>
+      <mass value="50.0" />
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+	       iyy="1.0" iyz="0.0"
+	       izz="1.0" />
+    </inertial>
+  </link>
+
+  <link name="mbot_head_link">
+   <visual>
+      <geometry>
+        <mesh filename="package://mbot_simulator/meshes/mbot_head.dae"/>
+      </geometry>
+      <origin rpy="${pi_2} 0 ${pi_2}" xyz="-0.05 0 0"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://mbot_simulator/meshes/mbot_head.dae"/>
+      </geometry>
+      <origin rpy="${pi_2} 0 ${pi_2}" xyz="-0.05 0 0"/>
+    </collision>
+    <inertial>
+      <mass value="50.0" />
+      <origin xyz="0.0 0.0 0.0"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+	       iyy="1.0" iyz="0.0"
+	       izz="1.0" />
+    </inertial>
+  </link>
+
+  <joint name="mbot_main_joint" type="fixed">
+    <parent link="mbot_base_link"/>
+    <child link="mbot_body_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="mbot_head_joint" type="revolute">
+    <parent link="mbot_body_link"/>
+    <child link="mbot_head_link"/>
+    <limit lower="${-pi_2}" upper="${pi_2}" effort="100.0" velocity="1.0" />
+    <axis xyz="0 0 1" />
+    <origin xyz="0.05 0 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>

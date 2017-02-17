@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package>
+  <name>mbot_simulation</name>
+  <version>0.0.1</version>
+  <description>
+      Monarch robot simulation with gazebo
+  </description>
+
+  <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
+
+  <license>GPLv3</license>
+
+  <author email="rodrigo.ventura@isr.ist.utl.pt">Rodrigo ventura</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>convex_decomposition</build_depend>
+  <build_depend>controller_manager</build_depend>
+  <build_depend>ivcon</build_depend>
+  <build_depend>transmission_interface</build_depend>
+  <build_depend>turtlebot_description</build_depend>
+  <build_depend>tf</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>convex_decomposition</run_depend>
+  <run_depend>controller_manager</run_depend>
+  <run_depend>ivcon</run_depend>
+  <run_depend>transmission_interface</run_depend>
+  <run_depend>turtlebot_description</run_depend>
+  <run_depend>tf</run_depend>
+
+</package>
