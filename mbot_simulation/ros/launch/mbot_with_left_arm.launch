@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="robot" default="$(optenv ROBOT !!NO_ROBOT_SET!!)"/>
+  <arg name="robot_env" default="$(optenv ROBOT_ENV !!NO_ROBOT_ENV_SET!!)"/>
+
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+
+  <arg name="init_pos_x" default="0.0"/>
+  <arg name="init_pos_y" default="0.0"/>
+  <arg name="init_pos_z" default="1.08"/>
+
+  <!-- start gazebo and load environment -->
+  <include file="$(find mbot_simulation)/ros/launch/mbot_world.launch">
+    <arg name="robot_env" value="$(arg robot_env)" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
+    <arg name="gui" value="$(arg gui)" />
+  </include>
+
+  <!-- upload robot description -->
+  <!--param name="robot_description" command="$(find xacro)/xacro.py $(find mbot_description)/xacro/mbot_with_left_ist_arm.urdf.xacro" /-->
+  <param name="robot_description" command="$(find xacro)/xacro.py $(find mbot_description)/xacro/mbot_body/mbot_body.urdf.xacro" />
+  <!--param name="robot_description" command="$(find xacro)/xacro.py $(find mbot_simulation)/ros/test/robot.urdf.xacro" /-->
+  <!--param name="robot_description" command="$(find xacro)/xacro.py $(find mir_hardware_config)/$(arg robot)/urdf/robot.urdf.xacro" /-->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot" respawn="false" output="screen"
+    args="-param robot_description
+          -urdf
+          -x $(arg init_pos_x)
+          -y $(arg init_pos_y)
+          -z $(arg init_pos_z)
+          -model mbot">
+  </node>
+
+  <!-- launch joint state controller -->
+  <include file="$(find mbot_simulation)/ros/launch/joint_state_controller.launch" />
+
+  <!-- launch robot state controller -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="100.0" />
+  </node>
+    
+  <!-- launch base controller -->
+  <include file="$(find mbot_simulation)/ros/launch/base_controller.launch" />
+  
+  <!-- launch arm controller -->
+  <!--include file="$(find mbot_simulation)/ros/launch/arm_controller.launch" /-->
+  
+  <!-- launch gripper controller -->
+  <!--rosparam file="$(find mbot_simulation)/ros/config/left_arm_gripper_controller.yaml" command="load" ns="left_arm"/--> <!-- upload gripper controller parameters -->
+  <!--node pkg="controller_manager" type="spawner" name="left_arm_gripper_controller_spawner"  args="left_arm/gripper_controller" respawn="false" output="screen" /--> <!-- spawn gripper controller -->
+
+</launch>
