@@ -14,17 +14,16 @@
 
   <!-- start gazebo and load environment -->
   <include file="$(find mbot_simulation)/ros/launch/mbot_world.launch">
-    <arg name="robot_env" value="$(arg robot_env)" />
+    <arg name="robot_env" value="isr-testbed" />
     <arg name="paused" value="$(arg paused)" />
     <arg name="use_sim_time" value="$(arg use_sim_time)" />
     <arg name="gui" value="$(arg gui)" />
   </include>
 
   <!-- upload robot description -->
-  <!--param name="robot_description" command="$(find xacro)/xacro.py $(find mbot_description)/xacro/mbot_with_left_ist_arm.urdf.xacro" /-->
-  <param name="robot_description" command="$(find xacro)/xacro.py $(find mbot_description)/xacro/mbot_body/mbot_body.urdf.xacro" />
-  <!--param name="robot_description" command="$(find xacro)/xacro.py $(find mbot_simulation)/ros/test/robot.urdf.xacro" /-->
-  <!--param name="robot_description" command="$(find xacro)/xacro.py $(find mir_hardware_config)/$(arg robot)/urdf/robot.urdf.xacro" /-->
+  <!--param name="robot_description" command="$(find xacro)/xacro.py $(find mbot_description)/urdf/mbot_with_left_ist_arm.urdf.xacro" /-->
+  <param name="robot_description" command="$(find xacro)/xacro.py $(find mbot_description)/urdf/mbot_body.urdf.xacro" />
+
   <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot" respawn="false" output="screen"
     args="-param robot_description
           -urdf
