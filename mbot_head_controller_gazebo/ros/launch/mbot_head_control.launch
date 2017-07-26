@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find mbot_head_controller_gazebo)/ros/config/head_control.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" ns="/mbot" args="joint_state_controller
+                                         mbot_head_position_controller
+				         mbot_head_camera_position_controller"/>
+
+</launch>

@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
 <package>
-  <name>mbot_simulation</name>
+  <name>mbot_simulation_environments</name>
   <version>0.0.1</version>
   <description>
-      Monarch robot simulation with gazebo
+      Monarch robot simulation environments with gazebo, currently an apartment
+      with some IKEA furniture for service robots testing.
   </description>
 
   <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
@@ -15,5 +16,5 @@
   <author email="rodrigo.ventura@isr.ist.utl.pt">Rodrigo ventura</author>
 
   <buildtool_depend>catkin</buildtool_depend>
- 
+
 </package>
