@@ -1,0 +1,22 @@
+<package>
+  <description brief="mbot_simulation">
+
+     mbot_simulation
+
+  </description>
+  <author>Joao</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/mbot_simulation</url>
+
+  <export>
+    <python path="${prefix}"/>
+  </export>
+
+  <depend package="roscpp"/>
+  <depend package="scout_msgs"/>
+  <depend package="tf"/>
+
+</package>
+
+
