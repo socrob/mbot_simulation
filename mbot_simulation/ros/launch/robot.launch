@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-    <!-- set the desired mbot world -->
-    <arg name="world_name" default="$(find mbot_simulation_environments)/worlds/stage_ISR_6thfloor.world"/>
+    <!-- set the desired mbot world (isr-empty-testbed.world also available) -->
+    <arg name="world_name" default="$(find mbot_simulation_environments)/worlds/isr-testbed.world"/>
 
     <!-- argument to enable arm simulation (not supported yet, always leave in false) -->
     <arg name="arm_required" value="false"/>
