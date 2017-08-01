@@ -4,7 +4,11 @@
     <name>mbot_head_controller_gazebo</name>
     <version>0.0.1</version>
     <description>
-        mbot_head_pan_controller_node - republisher used to make topic even between the real mbot
+        Contains:
+
+        - Launch files for running position controller interfaces for both neck and head camera.
+
+        - mbot_head_pan_controller_node : republisher used to make topic even between the real mbot
         and the simulated one. For more info check cpp file header.
     </description>
 
