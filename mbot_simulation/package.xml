@@ -3,7 +3,7 @@
   <name>mbot_simulation</name>
   <version>0.0.1</version>
   <description>
-      Monarch robot simulation with gazebo
+      Monarch robot simulation bringup launch files
   </description>
 
   <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
@@ -11,8 +11,6 @@
   <license>GPLv3</license>
 
   <author email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</author>
-  <author email="frederik.hegger@h-brs.de">Frederik Hegger</author>
-  <author email="rodrigo.ventura@isr.ist.utl.pt">Rodrigo ventura</author>
 
   <buildtool_depend>catkin</buildtool_depend>
  
