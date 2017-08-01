@@ -6,7 +6,7 @@
 
     <!-- argument to enable arm simulation (not supported yet, always leave in false) -->
     <arg name="arm_required" value="false"/>
-  
+
     <!-- Launch Gazebo server and client with the specified world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="debug" value="0" />
@@ -38,18 +38,12 @@
 
     <!-- spawn mbot -->
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-        args="-urdf -model mbot -param robot_description -x 0.0 -y 0.0 -z 0.8" />
+          args="-urdf -model mbot -param robot_description -x 0.0 -y 0.0 -z 0.8" />
 
-    <!-- mbot head simulation (neck control) -->
+    <!-- mbot head simulation (neck and cam tilt control) -->
     <include file="$(find mbot_head_controller_gazebo)/ros/launch/mbot_head_control.launch" />
-
-    <!-- mbot wheel tf >
-    <include file="$(find mbot_bringup_sim)/ros/launch/control.launch" /-->
-
-    <!-- mbot head pan format conversion node -->
-    <include file="$(find mbot_head_controller_gazebo)/ros/launch/mbot_head_pan_interface.launch" />
 
     <!-- run common components with real robot -->
     <include file="$(find mbot_bringup)/ros/launch/components/real_sim_common_components.launch" />
-    
+
 </launch>
