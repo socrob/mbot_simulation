@@ -17,7 +17,7 @@
     </include>
 
     <include>
-      <uri>model://rockin_d213</uri>
+      <uri>model://isr-testbed</uri>
     </include>
 
     <!-- Focus camera on tall pendulum -->

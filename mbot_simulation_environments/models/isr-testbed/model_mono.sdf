@@ -1,18 +1,18 @@
 <?xml version="1.0" ?>
 <sdf version="1.4">
-  <model name="rockin_d213">
+  <model name="isr-testbed">
     <pose>-3.455 -4.681 0  0 0 0</pose>
     <static>true</static>
 
     <link name="main">
       <visual name="main_visual">
 	<geometry>
-	  <mesh><uri>model://rockin_d213/rockin_2.dae</uri></mesh>
+	  <mesh><uri>model://isr-testbed/rockin_2.dae</uri></mesh>
 	</geometry>
       </visual>
       <collision name="main_col">
 	<geometry>
-	  <mesh><uri>model://rockin_d213/rockin_2.dae</uri></mesh>
+	  <mesh><uri>model://isr-testbed/rockin_2.dae</uri></mesh>
 	</geometry>
       </collision>
     </link>

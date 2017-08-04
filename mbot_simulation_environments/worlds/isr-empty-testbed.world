@@ -17,15 +17,15 @@
     </include>
 
     <include>
-      <uri>model://outside_wall</uri>
+      <uri>model://isr-empty-testbed/outside_wall</uri>
     </include>
 
     <include>
-      <uri>model://bedroom</uri>
+      <uri>model://isr-empty-testbed/bedroom</uri>
     </include>
 
     <include>
-      <uri>model://bathroom</uri>
+      <uri>model://isr-empty-testbed/bathroom</uri>
     </include>
 
     <include>
@@ -34,19 +34,19 @@
     </include>
 
     <include>
-      <uri>model://floor</uri>
+      <uri>model://isr-empty-testbed/floor</uri>
     </include>
  
     <include>
-      <uri>model://inside_hallway</uri>
+      <uri>model://isr-empty-testbed/inside_hallway</uri>
     </include>
 
     <include>
-      <uri>model://outside_hallway</uri>
+      <uri>model://isr-empty-testbed/outside_hallway</uri>
     </include>
 
     <include>
-      <uri>model://patio</uri>
+      <uri>model://isr-empty-testbed/patio</uri>
     </include>
 
     <!-- Focus camera on tall pendulum -->
