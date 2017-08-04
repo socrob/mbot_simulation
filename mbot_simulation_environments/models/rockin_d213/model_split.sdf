@@ -6,10 +6,10 @@
 
     <link name="walls">
       <visual name="walls_vis">
-	<geometry><mesh><uri>model://rockin_d213/walls.dae</uri></mesh></geometry>
+	<geometry><mesh><uri>model://rockin_d213/walls.stl</uri></mesh></geometry>
       </visual>
       <collision name="walls_col">
-	<geometry><mesh><uri>model://rockin_d213/walls.dae</uri></mesh></geometry>
+	<geometry><mesh><uri>model://rockin_d213/walls.stl</uri></mesh></geometry>
       </collision>
     </link>
 
