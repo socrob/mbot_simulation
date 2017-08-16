@@ -22,10 +22,10 @@
 
 #include <mbot_head_controller_gazebo/mbot_head_pan.h>
 
-MbotHeadPanControllerServer::MbotHeadPanControllerServer(): np_("~")
+MbotHeadPanControllerServer::MbotHeadPanControllerServer(): np_("")
 {
-    gazebo_pub_  = np_.advertise<std_msgs::Float64>("/mbot/mbot_head_position_controller/command", 1);
-    cmd_head_sub_ = np_.subscribe("/cmd_head", 1, &MbotHeadPanControllerServer::headPanCallback,this);
+    gazebo_pub_  = np_.advertise<std_msgs::Float64>("mbot_head_position_controller/command", 1);
+    cmd_head_sub_ = np_.subscribe("cmd_head", 1, &MbotHeadPanControllerServer::headPanCallback,this);
 }
 
 void MbotHeadPanControllerServer::headPanCallback(const std_msgs::UInt8MultiArray::ConstPtr& msg)

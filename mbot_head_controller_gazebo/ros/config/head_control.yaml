@@ -1,17 +1,16 @@
-mbot:
-  # Publish all joint states
-  joint_state_controller:
-    type: joint_state_controller/JointStateController
-    publish_rate: 50
+# Publish all joint states
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
 
-  # neck position controller
-  mbot_head_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: base_link_to_head_link_joint
-    pid: {p: 50.0, i: 0.01, d: 5.0}
+# neck position controller
+mbot_head_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: base_link_to_head_link_joint
+  pid: {p: 50.0, i: 0.01, d: 5.0}
 
-  # head tilt camera position controller
-  mbot_head_camera_position_controller:
-    type: effort_controllers/JointPositionController
-    joint: head_link_to_head_camera_link
-    pid: {p: 8.0, i: 0.5, d: 0.0}
+# head tilt camera position controller
+mbot_head_camera_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: head_link_to_head_camera_link
+  pid: {p: 8.0, i: 0.5, d: 0.0}
