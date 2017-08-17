@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(mbot_head_controller_gazebo)
+project(mbot_gazebo_control)
 
 find_package(catkin REQUIRED
     roscpp

@@ -20,7 +20,7 @@
  *
  */
 
-#include <mbot_head_controller_gazebo/mbot_head_pan.h>
+#include <mbot_gazebo_control/mbot_head_pan.h>
 
 MbotHeadPanControllerServer::MbotHeadPanControllerServer(): np_("")
 {

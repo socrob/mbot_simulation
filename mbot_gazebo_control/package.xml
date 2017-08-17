@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 <package>
 
-    <name>mbot_head_controller_gazebo</name>
+    <name>mbot_gazebo_control</name>
     <version>0.0.1</version>
     <description>
         Contains:
 
-        - Launch files for running position controller interfaces for both neck and head camera.
+        - Launch files for running controller interfaces for:
+            neck (position control)
+            head camera (position control)
+            wheels (velocity control)
 
         - mbot_head_pan_controller_node : republisher used to make topic even between the real mbot
-        and the simulated one. For more info check cpp file header.
+          and the simulated one. For more info check cpp file header.
     </description>
 
     <author email="parthc@umich.edu">Parth Chopra</author>
