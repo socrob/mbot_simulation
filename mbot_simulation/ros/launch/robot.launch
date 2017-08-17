@@ -41,7 +41,7 @@
           args="-urdf -model mbot -param robot_description -x 0.5 -y 0.5 -z 0.01" />
 
     <!-- mbot head simulation (neck and cam tilt control) -->
-    <include file="$(find mbot_gazebo_control)/ros/launch/mbot_head_control.launch" />
+    <include file="$(find mbot_gazebo_control)/ros/launch/mbot_control.launch" />
 
     <!-- run common components with real robot -->
     <include file="$(find mbot_bringup)/ros/launch/components/real_sim_common_components.launch" />

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
-    <!-- load position controllers for mbot neck and head camera (tilt camera on top of mbot head) -->
-    <rosparam file="$(find mbot_gazebo_control)/ros/config/head_control.yaml" command="load"/>
+    <!-- load position controllers for mbot neck, head camera (tilt camera on top of mbot head) and wheels -->
+    <rosparam file="$(find mbot_gazebo_control)/ros/config/mbot_control.yaml" command="load"/>
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
           output="screen" args="joint_state_controller
                                 mbot_head_position_controller
