@@ -1,5 +1,5 @@
 # Publish all joint states
-joint_state_controller:
+mbot_joint_publisher:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 

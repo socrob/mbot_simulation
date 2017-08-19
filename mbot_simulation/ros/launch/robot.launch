@@ -4,46 +4,44 @@
     <!-- set the desired mbot world (isr-empty-testbed.world also available) -->
     <arg name="world_name" default="$(find mbot_simulation_environments)/worlds/isr-testbed.world"/>
 
-    <!-- argument to enable arm simulation (not supported yet, always leave in false) -->
-    <arg name="arm_required" value="false"/>
-
     <!-- Launch Gazebo server and client with the specified world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="debug" value="0" />
         <arg name="gui" value="true" />
         <arg name="use_sim_time" value="true" />
+        <arg name="headless" value="false" />
         <arg name="world_name" value="$(arg world_name)" />
         <arg name="paused" value="false"/>
     </include>
 
     <!-- PID gains for the gazebo plugin -->
     <rosparam param="/gazebo_ros_control/pid_gains">
-        front_left_wheel:
-            p: 1 
-            i: 0
-            d: 0.1
-        front_right_wheel:
-            p: 1
-            i: 0
-            d: 0.1
-        rear_left_wheel:
-            p: 1
-            i: 0
-            d: 0.1
-        rear_right_wheel:
-            p: 1
-            i: 0
-            d: 0.1
+      front_left_wheel:
+        p: 1
+        i: 0.1
+        d: 0.0
+      front_right_wheel:
+        p: 1
+        i: 0.1
+        d: 0.0
+      rear_left_wheel:
+        p: 1
+        i: 0.1
+        d: 0.001
+      rear_right_wheel:
+        p: 1
+        i: 0.1
+        d: 0.0
     </rosparam>
 
-    <!-- spawn mbot -->
-    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-          args="-urdf -model mbot -param robot_description -x 0.5 -y 0.5 -z 0.01" />
+    <!-- run common components with real robot -->
+    <include file="$(find mbot_bringup)/ros/launch/components/real_sim_common_components.launch" />
 
     <!-- mbot head simulation (neck and cam tilt control) -->
     <include file="$(find mbot_gazebo_control)/ros/launch/mbot_control.launch" />
 
-    <!-- run common components with real robot -->
-    <include file="$(find mbot_bringup)/ros/launch/components/real_sim_common_components.launch" />
+    <!-- spawn mbot -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+          args="-urdf -model mbot -param robot_description -x 0.5 -y 0.5 -z 0.01" />
 
 </launch>

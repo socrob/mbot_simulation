@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
 <launch>
 
-    <!-- load position controllers for mbot neck, head camera (tilt camera on top of mbot head) and wheels -->
+    <!-- joint publisher, odometry based on cmd_vel, neck and head cam tilt controllers -->
     <rosparam file="$(find mbot_gazebo_control)/ros/config/mbot_control.yaml" command="load"/>
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-          output="screen" args="joint_state_controller
+          output="screen" args="mbot_joint_publisher
+                                mbot_velocity_controller
                                 mbot_head_position_controller
-                                mbot_head_camera_position_controller
-                                mbot_velocity_controller"/>
+                                mbot_head_camera_position_controller"/>
+
+    <!-- relay the commanded velocity of the robot to be listened by the odom publisher -->
+    <node pkg="topic_tools" type="relay" name="cmd_vel_relay"
+          args="cmd_vel mbot_velocity_controller/cmd_vel" />
 
     <!-- suscribe to cmd_head std_msgs/UInt8MultiArray (with position/velocity info)
          and republish to gazebo command topic on the form std_msgs/Float64 (position only) -->
