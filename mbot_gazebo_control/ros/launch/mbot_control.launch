@@ -13,8 +13,10 @@
     <node pkg="topic_tools" type="relay" name="cmd_vel_relay"
           args="cmd_vel mbot_velocity_controller/cmd_vel" />
 
-    <!-- suscribe to cmd_head std_msgs/UInt8MultiArray (with position/velocity info)
-         and republish to gazebo command topic on the form std_msgs/Float64 (position only) -->
-    <node pkg="mbot_gazebo_control" type="mbot_head_pan_controller" name="mbot_head_pan_node" output="screen" />
+    <!-- 1. subscribe to cmd_head std_msgs/UInt8MultiArray (with position/velocity info)
+         and republish to gazebo command topic on the form std_msgs/Float64 (position only)
+         2. subscribe to std_msgs/UInt16 which is the datatype of the real robot tilt mechanism
+         and republish to gazebo in the form std_msgs/Float64 -->
+    <node pkg="mbot_gazebo_control" type="mbot_head_republisher" name="mbot_head_republisher_node" output="screen" />
 
 </launch>

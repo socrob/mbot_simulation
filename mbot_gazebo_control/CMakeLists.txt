@@ -17,5 +17,5 @@ catkin_package(CATKIN_DEPENDS
 )
 
 ### EXECUTABLES
-add_executable(mbot_head_pan_controller ros/src/mbot_head_pan_controller.cpp)
-target_link_libraries(mbot_head_pan_controller ${catkin_LIBRARIES})
+add_executable(mbot_head_republisher ros/src/mbot_head_gazebo_republisher.cpp)
+target_link_libraries(mbot_head_republisher ${catkin_LIBRARIES})
