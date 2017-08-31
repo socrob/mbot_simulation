@@ -3,11 +3,19 @@
 
     <!-- joint publisher, odometry based on cmd_vel, neck and head cam tilt controllers -->
     <rosparam file="$(find mbot_gazebo_control)/ros/config/mbot_control.yaml" command="load"/>
+    <rosparam file="$(find mbot_gazebo_control)/ros/config/mbot_arm_control.yaml" command="load"/>
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
           output="screen" args="mbot_joint_publisher
                                 mbot_velocity_controller
                                 mbot_head_position_controller
-                                mbot_head_camera_position_controller"/>
+                                mbot_head_camera_position_controller
+                                left_arm_joint0_position_controller
+                                left_arm_joint1_position_controller
+                                left_arm_joint2_position_controller
+                                left_arm_joint3_position_controller
+                                left_arm_joint4_position_controller
+                                left_arm_joint5_position_controller
+                                left_arm_joint6_position_controller"/>
 
     <!-- relay the commanded velocity of the robot to be listened by the odom publisher -->
     <node pkg="topic_tools" type="relay" name="cmd_vel_relay"
