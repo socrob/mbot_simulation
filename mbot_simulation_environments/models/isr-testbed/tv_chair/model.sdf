@@ -21,7 +21,7 @@ such as removing harcoded paths and material script tag to load mesh UV mapping 
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://isr-testbed/tv_chair/tv_chair.dae</uri>
+            <uri>file://isr-testbed/tv_chair/tv_chair.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -45,7 +45,7 @@ such as removing harcoded paths and material script tag to load mesh UV mapping 
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>model://isr-testbed/tv_chair/tv_chair.dae</uri>
+            <uri>file://isr-testbed/tv_chair/tv_chair.dae</uri>
           </mesh>
         </geometry>
         <surface>

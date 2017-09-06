@@ -18,7 +18,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/harode/models/tv_table/tv_table.dae</uri>
+            <uri>file://isr-testbed/tv_table/tv_table.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -42,7 +42,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/harode/models/tv_table/tv_table.dae</uri>
+            <uri>file://isr-testbed/tv_table/tv_table.dae</uri>
           </mesh>
         </geometry>
         <surface>

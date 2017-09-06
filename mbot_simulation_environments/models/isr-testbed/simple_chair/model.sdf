@@ -18,7 +18,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/harode/models/simple_chair/simple_chair.dae</uri>
+            <uri>file://isr-testbed/simple_chair/simple_chair.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>
@@ -42,7 +42,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/harode/models/simple_chair/simple_chair.dae</uri>
+            <uri>file://isr-testbed/simple_chair/simple_chair.dae</uri>
           </mesh>
         </geometry>
         <surface>

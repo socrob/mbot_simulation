@@ -3,8 +3,9 @@
   <name>mbot_simulation_environments</name>
   <version>0.0.1</version>
   <description>
-      Monarch robot simulation environments with gazebo, currently an apartment
-      with some IKEA furniture for service robots testing.
+      Monarch robot (mbot) simulation environments with gazebo:
+      - ERL testbed apartment
+      - Almost empty apartment with one table on it
   </description>
 
   <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>
@@ -12,9 +13,14 @@
   <license>GPLv3</license>
 
   <author email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</author>
-  <author email="frederik.hegger@h-brs.de">Frederik Hegger</author>
   <author email="rodrigo.ventura@isr.ist.utl.pt">Rodrigo ventura</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>gazebo_ros</run_depend>
+
+  <export>
+    <gazebo_ros gazebo_media_path="${prefix}"/>
+  </export>
 
 </package>
