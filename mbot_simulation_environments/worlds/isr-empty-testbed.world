@@ -1,6 +1,9 @@
 <?xml version="1.0" ?>
+
+<!-- Instituto Superior Tecnico [2017] -->
+
 <sdf version="1.4">
-  <world name="default">
+  <world name="isr-empty-testbed">
     <include>
       <uri>model://ground_plane</uri>
       <material>

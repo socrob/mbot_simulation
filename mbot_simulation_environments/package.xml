@@ -3,9 +3,20 @@
   <name>mbot_simulation_environments</name>
   <version>0.0.1</version>
   <description>
-      Monarch robot (mbot) simulation environments with gazebo:
+
+      This package is brought to you by:
+
+      - Instituto Superior Tecnico, Lisboa
+      - Institute for Systems and Robotics (ISR)
+      - Laboratório de Robótica e Sistemas em Engenharia e Ciência (LARSyS)
+      - SocRob RoboCup team
+      
+      Description:
+
+      MOnarCH robot (mbot) simulation environments with gazebo:
       - ERL testbed apartment
       - Almost empty apartment with one table on it
+
   </description>
 
   <maintainer email="olima@isr.tecnico.ulisboa.pt">Oscar Lima</maintainer>

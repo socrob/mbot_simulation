@@ -1,5 +1,8 @@
 <?xml version="1.0" ?>
 <sdf version="1.6">
+
+<!-- Instituto Superior Tecnico [2017] -->
+
 <world name="isr-testbed">
 
     <!-- ground -->
