@@ -50,6 +50,12 @@
             <pose>2.22757 -0.156695 0 0 0 -1.56643</pose>
         </include>
 
+        <!-- erl board which goes on top of kitchen table for FBM1 test -->
+        <!--include>
+            <uri>file://isr-testbed/erl_board</uri>
+            <pose>2.0 -0.05 0.75 0 0 -1.56643</pose>
+        </include-->
+
         <!-- simple chair 1D (used in dinning room) -->
         <include>
             <uri>file://isr-testbed/simple_chair</uri>
