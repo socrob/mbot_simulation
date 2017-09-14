@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
 <launch>
 
+    <!-- whether you want gazebo gui or not (saves resources if you set this to false) -->
+    <arg name="gazebo_gui" default="true" />
+
     <!-- launch robot environment -->
-    <include file="$(find mbot_simulation_environments)/launch/load_environment_example.launch" />
+    <include file="$(find mbot_simulation_environments)/launch/load_environment_example.launch" >
+        <arg name="gazebo_gui" value="$(arg gazebo_gui)" />
+    </include>
 
     <!-- PID gains for the gazebo plugin -->
     <rosparam param="/gazebo_ros_control/pid_gains">
