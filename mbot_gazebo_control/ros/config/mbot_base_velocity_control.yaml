@@ -1,21 +1,7 @@
-# Publish all joint states
-mbot_joint_publisher:
-  type: joint_state_controller/JointStateController
-  publish_rate: 50
+# mbot base velocity controller params, uses custom plugin from ridgeback robot
+# https://github.com/socrob/ridgeback/tree/kinetic/ridgeback_control
+# mbot odometry is published by this component
 
-# neck position controller
-mbot_head_position_controller:
-  type: effort_controllers/JointPositionController
-  joint: base_link_to_head_link_joint
-  pid: {p: 50.0, i: 0.01, d: 5.0}
-
-# head tilt camera position controller
-mbot_head_camera_position_controller:
-  type: effort_controllers/JointPositionController
-  joint: head_link_to_head_camera_link
-  pid: {p: 0.5, i: 0.01, d: 0.01}
-
-# publishes odometry with custom plugin from ridgeback robot
 mbot_velocity_controller:
   type: "mecanum_drive_controller/MecanumDriveController"
   front_left_wheel_joint: "front_left_wheel"
