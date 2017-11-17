@@ -3,10 +3,9 @@
 
   <!-- ROS control based spawners to control the mbot robot base and arm -->
 
-  <!--TODO: test this launch file on the harode server-->
-
   <!-- get from env the ROBOT varibale -->
   <arg name="robot" default="$(optenv ROBOT !!ROBOT env NOT SET!!)" />
+
   <!-- identify from ROBOT env if arm is required -->
   <arg name="arm_required" value="$(eval robot!='mbot05')"/>
 
@@ -84,4 +83,3 @@
   <node pkg="mbot_gazebo_control" type="mbot_head_republisher" name="mbot_head_republisher_node" output="screen" />
 
 </launch>
-
