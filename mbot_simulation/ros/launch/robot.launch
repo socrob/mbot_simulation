@@ -57,4 +57,11 @@
                 -J left_arm_joint5 0.63
                 -J left_arm_joint6 0.44" /-->
 
+    <!-- run image proc to rectify image-->
+    <!--node pkg="image_proc" type="image_proc" name="image_rectifier" output="screen" ns="head_camera/rgb" >
+        <remap from="camera_info" to="head_camera/rgb/camera_info" />
+        <remap from="~image" to="head_camera/rgb/image_rect_color" />
+        <remap from="~camera_info" to="head_camera/rgb/camera_info" />
+    </node-->
+
 </launch>
