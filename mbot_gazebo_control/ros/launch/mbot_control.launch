@@ -9,7 +9,7 @@
   <!-- identify from ROBOT env if arm is required -->
   <arg name="arm_required" value="$(eval robot!='mbot05')"/>
 
-  <!-- WARNING: Only one at a time can be enabled ! -->
+  <!-- select arm controller, WARNING: Only one at a time can be enabled ! -->
   <arg name="arm_position_ctrl_required" default="false" />
   <arg name="arm_velocity_ctrl_required" default="false" />
   <arg name="arm_trajectory_ctrl_required" default="true" />
@@ -17,16 +17,17 @@
   <!-- the location of the control parameters -->
   <arg name="ctrl_config_base_path" default="$(find mbot_gazebo_control)/ros/config" />
 
-  <!-- base, neck, head cam, joint state and gripper controllers -->
+  <!-- load base, neck, head cam and joint state parameters to param server -->
   <rosparam file="$(arg ctrl_config_base_path)/mbot_base_velocity_control.yaml" command="load" />
   <rosparam file="$(arg ctrl_config_base_path)/mbot_head_position_control.yaml" command="load" />
-  <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_joint_state_control.yaml" command="load" />
+  <rosparam file="$(arg ctrl_config_base_path)/mbot_joint_state_control.yaml" command="load" />
 
+  <!-- spawn base, neck, head cam and joint state controllers -->
   <node pkg="controller_manager" type="spawner" name="mbot_basic_ctrl_spawner"
-        output="screen" args="mbot_velocity_controller
+        output="screen" args="mbot_base_velocity_controller
                               mbot_head_position_controller
                               mbot_head_camera_position_controller
-                              joint_state_controller" />
+                              mbot_joint_state_controller" />
 
   <!-- arm is required -->
   <group if="$(arg arm_required)">
