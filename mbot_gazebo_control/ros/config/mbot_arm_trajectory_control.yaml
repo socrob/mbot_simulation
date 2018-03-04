@@ -1,37 +1,50 @@
 # left mbot arm trajectory controller params
 
-# joint (action lib) trajectory controller
+# joint (actionlib) trajectory controller
 # check http://wiki.ros.org/joint_trajectory_controller
-# and http://wiki.ros.org/joint_trajectory_controller - Controller_configuration_examples
 left_arm_controller:
-  type: effort_controllers/JointTrajectoryController
-  joints:
-    - left_arm_joint0
-    - left_arm_joint1
-    - left_arm_joint2
-    - left_arm_joint3
-    - left_arm_joint4
-    - left_arm_joint5
-    - left_arm_joint6
+    type: effort_controllers/JointTrajectoryController
+    joints:
+      - left_arm_joint0
+      - left_arm_joint1
+      - left_arm_joint2
+      - left_arm_joint3
+      - left_arm_joint4
+      - left_arm_joint5
+      - left_arm_joint6
 
-  constraints:
-    goal_time: 0.5                   # Override default
-    stopped_velocity_tolerance: 0.02 # Override default
-    left_arm_joint0:
-      trajectory: 0.05               # Not enforced if unspecified
-      goal: 0.02                     # Not enforced if unspecified
-    head_2_joint:
-      goal: 0.01                     # Not enforced if unspecified
+    gains: # Required because we're controlling an effort interface
+      left_arm_joint0: {p: &kp_default 1000,  d: &kd_default 5.0, i: &ki_default 2, i_clamp: &ki_clamp_default 2} # & defines 1 time only
+      left_arm_joint1: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default} # * uses previously defined in &
+      left_arm_joint2: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default} # confused? check: http://yaml.org/spec/current.html#id2502311
+      left_arm_joint3: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default}
+      left_arm_joint4: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default}
+      left_arm_joint5: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default}
+      left_arm_joint6: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default}
 
-  gains: # Required because we're controlling an effort interface
-    left_arm_joint0: {p: 50.0,  d: 5.0, i: 0.01, i_clamp: 1}
-    left_arm_joint1: {p: 50.0,  d: 5.0, i: 0.01, i_clamp: 1}
-    left_arm_joint2: {p: 50.0,  d: 5.0, i: 0.01, i_clamp: 1}
-    left_arm_joint3: {p: 50.0,  d: 5.0, i: 0.01, i_clamp: 1}
-    left_arm_joint4: {p: 50.0,  d: 5.0, i: 0.01, i_clamp: 1}
-    left_arm_joint5: {p: 50.0,  d: 5.0, i: 0.01, i_clamp: 1}
-    left_arm_joint6: {p: 50.0,  d: 5.0, i: 0.01, i_clamp: 1}
+    constraints:
+      goal_time: 4.0
+      stopped_velocity_tolerance: 1.0
+      left_arm_joint0:
+        goal: &goal_pos_constraint 0.5
+        trajectory: &trajectory_pos_constraint 1.0
+      left_arm_joint1:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      left_arm_joint2:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      left_arm_joint3:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      left_arm_joint4:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      left_arm_joint5:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
+      left_arm_joint6:
+        goal: *goal_pos_constraint
+        trajectory: *trajectory_pos_constraint
 
-  state_publish_rate:  25            # Override default
-  action_monitor_rate: 30            # Override default
-  stop_trajectory_duration: 0        # Override default
+    stop_trajectory_duration: 1.0
