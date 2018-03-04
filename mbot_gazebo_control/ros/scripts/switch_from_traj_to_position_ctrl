@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# call service to switch from arm trajectory control sim to position control
+rosservice call /controller_manager/switch_controller "
+  start_controllers:
+  - 'left_arm_joint0_position_controller'
+  - 'left_arm_joint1_position_controller'
+  - 'left_arm_joint2_position_controller'
+  - 'left_arm_joint3_position_controller'
+  - 'left_arm_joint4_position_controller'
+  - 'left_arm_joint5_position_controller'
+  - 'left_arm_joint6_position_controller'
+  stop_controllers:
+  - 'left_arm_traj_controller'
+  strictness: 1" # strict 2, best effort 1

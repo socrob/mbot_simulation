@@ -37,10 +37,14 @@
     <node pkg="controller_manager" type="spawner" name="mbot_gripper_ctrl_spawner"
           output="screen" args="left_arm_gripper_joint_position_controller" />
 
+    <!-- load params even if ctrl is not set, to enable switching controllers during runtime -->
+    <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_position_control.yaml" command="load" />
+    <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_velocity_control.yaml" command="load" />
+    <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_trajectory_control.yaml" command="load" />
+
     <group if="$(arg arm_position_ctrl_required)">
 
-      <!-- load left arm position controller -->
-      <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_position_control.yaml" command="load" />
+      <!-- spawn left arm position controller -->
       <node pkg="controller_manager" type="spawner" name="mbot_pos_arm_ctrl_spawner"
             output="screen" args="left_arm_joint0_position_controller
                                 left_arm_joint1_position_controller
@@ -52,8 +56,7 @@
     </group>
 
     <group if="$(arg arm_velocity_ctrl_required)">
-      <!-- load left arm velocity controller -->
-      <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_velocity_control.yaml" command="load" />
+      <!-- spawn left arm velocity controller -->
       <node pkg="controller_manager" type="spawner" name="mbot_vel_arm_ctrl_spawner"
             output="screen" args="left_arm_joint0_velocity_controller
                                 left_arm_joint1_velocity_controller
@@ -65,10 +68,9 @@
     </group>
 
     <group if="$(arg arm_trajectory_ctrl_required)">
-      <!-- load left arm trajectory controller -->
-      <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_trajectory_control.yaml" command="load" />
+      <!-- spawn left arm trajectory controller -->
       <node pkg="controller_manager" type="spawner" name="mbot_traj_arm_ctrl_spawner"
-            output="screen" args="left_arm_controller" />
+            output="screen" args="left_arm_traj_controller" />
     </group>
 
   </group>
