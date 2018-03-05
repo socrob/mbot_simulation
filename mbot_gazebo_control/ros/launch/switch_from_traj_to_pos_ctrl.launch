@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- to switch arm sim from trajectory controller to position controller during runtime -->
+    
+    <!-- unspawn arm sim trajectory controller -->
+    <node pkg="controller_manager" type="unspawner" name="traj_ctrl_unspawner" args="left_arm_traj_controller" />
+
+    <!-- spawn arm sim position controller -->
+    <node pkg="controller_manager" type="spawner" name="pos_ctrl_spawner"
+          args="left_arm_joint0_position_controller
+                left_arm_joint1_position_controller
+                left_arm_joint2_position_controller
+                left_arm_joint3_position_controller
+                left_arm_joint4_position_controller
+                left_arm_joint5_position_controller
+                left_arm_joint6_position_controller" />
+
+</launch>
