@@ -22,15 +22,13 @@
 
 #include <mbot_gazebo_control/mbot_head_gazebo_republisher.h>
 
-MbotHeadGazeboRepublisher::MbotHeadGazeboRepublisher (): nh_ (""), neck_motion_request_received_ (false), head_cam_tilt_request_received_ (false)
+MbotHeadGazeboRepublisher::MbotHeadGazeboRepublisher (): nh_ (""), neck_motion_request_received_ (false) 
 {
     // subscriptions
     cmd_head_pan_sub_ = nh_.subscribe ("cmd_head", 1, &MbotHeadGazeboRepublisher::headPanCallback,this);
-    cmd_head_cam_tilt_sub_ = nh_.subscribe ("cmd_head_camera_motor", 1, &MbotHeadGazeboRepublisher::headCamTiltCallback,this);
 
     // publications
-    mbot_neck_pub_  = nh_.advertise <std_msgs::Float64> ("mbot_head_position_controller/command", 1);
-    mbot_head_cam_tilt_pub_  = nh_.advertise <std_msgs::Float64> ("mbot_head_camera_position_controller/command", 1);
+    mbot_neck_pub_  = nh_.advertise <std_msgs::Float64> ("head_position_controller/command", 1);
 }
 
 void MbotHeadGazeboRepublisher::headPanCallback (const std_msgs::UInt8MultiArray::ConstPtr& msg)
@@ -53,28 +51,6 @@ void MbotHeadGazeboRepublisher::republishNeckData ()
     ROS_DEBUG ("Angle degrees : %d", pan_angle_.data[0]);
 }
 
-void MbotHeadGazeboRepublisher::headCamTiltCallback (const std_msgs::UInt16::ConstPtr& msg)
-{
-    head_cam_tilt_angle_ = *msg;
-    head_cam_tilt_request_received_ = true;
-}
-
-void MbotHeadGazeboRepublisher::republishHeadCamTiltData ()
-{
-    ROS_DEBUG ("Head cam tilt angle requested : [%d]", head_cam_tilt_angle_.data);
-
-    std_msgs::Float64 tilt_angle;
-
-    // 1.0 corresponds to 75
-    // 1.4 corresponds roughly to 95
-    // 1. transform from deg to rad (deg * pi / 180) and substract offset
-    tilt_angle.data = ((float)(head_cam_tilt_angle_.data) * M_PI / 180.0) - 0.309 ;
-
-    mbot_head_cam_tilt_pub_.publish (tilt_angle);
-
-    ROS_INFO ("Tilting head cam at an angle of (radians): %.2f", tilt_angle.data);
-}
-
 void MbotHeadGazeboRepublisher::update ()
 {
     // check if a neck pan request has been received
@@ -85,15 +61,6 @@ void MbotHeadGazeboRepublisher::update ()
 
         // process request
         republishNeckData();
-    }
-
-    if (head_cam_tilt_request_received_)
-    {
-        // lower flag
-        head_cam_tilt_request_received_ = false;
-
-        // process request
-        republishHeadCamTiltData();
     }
 }
 

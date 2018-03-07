@@ -2,7 +2,7 @@
 # https://github.com/socrob/ridgeback/tree/kinetic/ridgeback_control
 # mbot odometry is published by this component
 
-mbot_base_velocity_controller:
+base_velocity_controller:
   type: "mecanum_drive_controller/MecanumDriveController"
   front_left_wheel_joint: "front_left_wheel"
   back_left_wheel_joint: "rear_left_wheel"
