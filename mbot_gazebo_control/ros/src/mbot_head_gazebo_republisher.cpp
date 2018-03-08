@@ -21,6 +21,7 @@
  */
 
 #include <mbot_gazebo_control/mbot_head_gazebo_republisher.h>
+#include <math.h>
 
 MbotHeadGazeboRepublisher::MbotHeadGazeboRepublisher (): nh_ (""), neck_motion_request_received_ (false) 
 {
@@ -43,7 +44,7 @@ void MbotHeadGazeboRepublisher::republishNeckData ()
 
     std_msgs::Float64 pan_angle;
 
-    pan_angle.data = (3.14159 * (float)(pan_angle_.data[0] - 85)) / 180.0;
+    pan_angle.data = (M_PI * (float)(pan_angle_.data[0] - 90)) / 180.0;
 
     mbot_neck_pub_.publish (pan_angle);
 
