@@ -3,7 +3,7 @@
 # joint (actionlib) trajectory controller
 # check http://wiki.ros.org/joint_trajectory_controller
 left_arm_traj_controller:
-    type: effort_controllers/JointTrajectoryController
+    type: velocity_controllers/JointTrajectoryController
     joints:
       - left_arm_joint0
       - left_arm_joint1
@@ -13,7 +13,7 @@ left_arm_traj_controller:
       - left_arm_joint5
       - left_arm_joint6
 
-    gains: # Required because we're controlling an effort interface
+    gains: # Required because we're controlling an velocity interface
       left_arm_joint0: {p: &kp_default 1000,  d: &kd_default 5.0, i: &ki_default 2, i_clamp: &ki_clamp_default 2} # & defines 1 time only
       left_arm_joint1: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default} # * uses previously defined in &
       left_arm_joint2: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default} # confused? check: http://yaml.org/spec/current.html#id2502311
