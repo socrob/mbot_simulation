@@ -15,29 +15,29 @@
   <arg name="ctrl_config_base_path" default="$(find mbot_gazebo_control)/ros/config" />
 
   <!-- load base, neck, head cam and joint state parameters to param server -->
-  <rosparam file="$(arg ctrl_config_base_path)/mbot_base_velocity_control.yaml" command="load" />
-  <rosparam file="$(arg ctrl_config_base_path)/mbot_head_position_control.yaml" command="load" />
-  <rosparam file="$(arg ctrl_config_base_path)/mbot_joint_state_control.yaml" command="load" />
+  <rosparam file="$(arg ctrl_config_base_path)/base_velocity_control.yaml" command="load" />
+  <rosparam file="$(arg ctrl_config_base_path)/head_position_control.yaml" command="load" />
+  <rosparam file="$(arg ctrl_config_base_path)/joint_state_control.yaml" command="load" />
 
   <!-- spawn base, neck, head cam and joint state controllers -->
-  <node pkg="controller_manager" type="spawner" name="mbot_basic_ctrl_spawner"
-        output="screen" args="mbot_base_velocity_controller
-                              mbot_head_position_controller
-                              mbot_head_camera_position_controller
-                              mbot_joint_state_controller" />
+  <node pkg="controller_manager" type="spawner" name="basic_ctrl_spawner"
+        output="screen" args="base_velocity_controller
+                              head_position_controller
+                              head_camera_position_controller
+                              joint_state_controller" />
 
   <!-- arm is required -->
   <group if="$(arg arm_required)" >
 
     <!-- load gripper controller (position control, 1 joint) -->
-    <rosparam file="$(arg ctrl_config_base_path)/mbot_gripper_position_control.yaml" command="load" />
-    <node pkg="controller_manager" type="spawner" name="mbot_gripper_ctrl_spawner"
+    <rosparam file="$(arg ctrl_config_base_path)/gripper_position_control.yaml" command="load" />
+    <node pkg="controller_manager" type="spawner" name="gripper_ctrl_spawner"
           output="screen" args="left_arm_gripper_joint_position_controller" />
 
     <!-- upload left arm position controller params to param server -->
-    <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_position_control.yaml" command="load" />
+    <rosparam file="$(arg ctrl_config_base_path)/arm_position_control.yaml" command="load" />
     <!-- load (but do not start) left arm position controller -->
-    <node pkg="controller_manager" type="spawner" name="mbot_pos_arm_ctrl_spawner"
+    <node pkg="controller_manager" type="spawner" name="pos_arm_ctrl_spawner"
           output="screen" args="--stopped left_arm_joint0_position_controller
                               left_arm_joint1_position_controller
                               left_arm_joint2_position_controller
@@ -47,9 +47,9 @@
                               left_arm_joint6_position_controller" />
 
     <!-- upload left arm velocity controller params to param server -->
-    <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_velocity_control.yaml" command="load" />
+    <rosparam file="$(arg ctrl_config_base_path)/arm_velocity_control.yaml" command="load" />
     <!-- load (but do not start) left arm velocity controller -->
-    <node pkg="controller_manager" type="spawner" name="mbot_vel_arm_ctrl_spawner"
+    <node pkg="controller_manager" type="spawner" name="vel_arm_ctrl_spawner"
           output="screen" args="--stopped left_arm_joint0_velocity_controller
                               left_arm_joint1_velocity_controller
                               left_arm_joint2_velocity_controller
@@ -59,21 +59,20 @@
                               left_arm_joint6_velocity_controller" />
 
     <!-- upload left arm trajectory controller params to param server -->
-    <rosparam file="$(arg ctrl_config_base_path)/mbot_arm_trajectory_control.yaml" command="load" />
+    <rosparam file="$(arg ctrl_config_base_path)/arm_trajectory_control.yaml" command="load" />
     <!-- load and start left arm trajectory controller -->
-    <node pkg="controller_manager" type="spawner" name="mbot_traj_arm_ctrl_spawner"
+    <node pkg="controller_manager" type="spawner" name="traj_arm_ctrl_spawner"
           output="screen" args="left_arm_traj_controller" />
 
   </group> <!-- closes if arm required tag -->
 
   <!-- relay the commanded velocity of the robot to be listened by the odom publisher -->
   <node pkg="topic_tools" type="relay" name="cmd_vel_relay"
-        args="cmd_vel mbot_velocity_controller/cmd_vel" />
+        args="cmd_vel velocity_controller/cmd_vel" />
 
   <!-- 1. subscribe to cmd_head std_msgs/UInt8MultiArray (with position/velocity info)
-          and republish to gazebo command topic on the form std_msgs/Float64 (position only)
-       2. subscribe to std_msgs/UInt16 which is the datatype of the real robot tilt mechanism
-          and republish to gazebo in the form std_msgs/Float64 -->
+          and republish to gazebo command topic on the form std_msgs/Float64 (position only) -->
   <node pkg="mbot_gazebo_control" type="mbot_head_republisher" name="mbot_head_republisher_node" output="screen" />
+
 
 </launch>
