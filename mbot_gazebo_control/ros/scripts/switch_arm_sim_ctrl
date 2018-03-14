@@ -1,12 +1,17 @@
 #!/bin/bash
 
-# args: current desired (controller) : position, velocity, trajectory
-#       i.e. position velocity (this will switch from position to velocity controller
+# args: desired (controller) : position, velocity, trajectory
 
-function switch_from_traj_to_x()
+function switch_to_pos_or_vel()
 {
 
 # args: 1. either position or velocity
+local other
+if [[ (($1 == 'velocity')) ]] ; then
+    other='position'
+else
+    other='velocity'
+fi
 
 # service call to switch controllers
 rosservice call /controller_manager/switch_controller "
@@ -19,77 +24,57 @@ rosservice call /controller_manager/switch_controller "
   - 'left_arm_joint5_$1_controller'
   - 'left_arm_joint6_$1_controller'
   stop_controllers:
+  - 'left_arm_joint0_${other}_controller'
+  - 'left_arm_joint1_${other}_controller'
+  - 'left_arm_joint2_${other}_controller'
+  - 'left_arm_joint3_${other}_controller'
+  - 'left_arm_joint4_${other}_controller'
+  - 'left_arm_joint5_${other}_controller'
+  - 'left_arm_joint6_${other}_controller'
   - 'left_arm_traj_controller'
   strictness: 1" # strict 2, best effort 1
 }
 
-function switch_from_x_to_traj()
+function switch_to_traj()
 {
-
-# args: 1. either position or velocity
 
 # service call to switch controllers
 rosservice call /controller_manager/switch_controller "
   start_controllers:
   - 'left_arm_traj_controller'
   stop_controllers:
-  - 'left_arm_joint0_$1_controller'
-  - 'left_arm_joint1_$1_controller'
-  - 'left_arm_joint2_$1_controller'
-  - 'left_arm_joint3_$1_controller'
-  - 'left_arm_joint4_$1_controller'
-  - 'left_arm_joint5_$1_controller'
-  - 'left_arm_joint6_$1_controller'
+  - 'left_arm_joint0_position_controller'
+  - 'left_arm_joint1_position_controller'
+  - 'left_arm_joint2_position_controller'
+  - 'left_arm_joint3_position_controller'
+  - 'left_arm_joint4_position_controller'
+  - 'left_arm_joint5_position_controller'
+  - 'left_arm_joint6_position_controller'
+  - 'left_arm_joint0_velocity_controller'
+  - 'left_arm_joint1_velocity_controller'
+  - 'left_arm_joint2_velocity_controller'
+  - 'left_arm_joint3_velocity_controller'
+  - 'left_arm_joint4_velocity_controller'
+  - 'left_arm_joint5_velocity_controller'
+  - 'left_arm_joint6_velocity_controller'
   strictness: 1" # strict 2, best effort 1
 }
 
-function switch_from_x_y()
-{
+if (( $# != 1 )) ; then
+    echo "Usage: ${0} desired_controller"
+    exit 1
+fi
 
-# args: 1. either position or velocity, 2. either position or velocity
-
-# service call to switch controllers
-rosservice call /controller_manager/switch_controller "
-  start_controllers:
-  - 'left_arm_joint0_$2_controller'
-  - 'left_arm_joint1_$2_controller'
-  - 'left_arm_joint2_$2_controller'
-  - 'left_arm_joint3_$2_controller'
-  - 'left_arm_joint4_$2_controller'
-  - 'left_arm_joint5_$2_controller'
-  - 'left_arm_joint6_$2_controller'
-  stop_controllers:
-  - 'left_arm_joint0_$1_controller'
-  - 'left_arm_joint1_$1_controller'
-  - 'left_arm_joint2_$1_controller'
-  - 'left_arm_joint3_$1_controller'
-  - 'left_arm_joint4_$1_controller'
-  - 'left_arm_joint5_$1_controller'
-  - 'left_arm_joint6_$1_controller'
-  strictness: 1" # strict 2, best effort 1
-}
-
-if [[ ( "$1" == "trajectory" && "$2" == "position" ) ]]; then
-    echo 'Switching from trajectory controller to position controller'
-    switch_from_traj_to_x position
-elif [[ ( "$1" == "trajectory" && "$2" == "velocity" ) ]]; then
-    echo 'Switching from trajectory controller to velocity controller'
-    switch_from_traj_to_x velocity
-elif [[ ( "$1" == "position" && "$2" == "trajectory" ) ]]; then
-    echo 'Switching from position controller to trajectory controller'
-    switch_from_x_to_traj position
-elif [[ ( "$1" == "velocity" && "$2" == "trajectory" ) ]]; then
-    echo 'Switching from velocity controller to trajectory controller'
-    switch_from_x_to_traj velocity
-elif [[ ( "$1" == "position" && "$2" == "velocity" ) ]]; then
-    echo 'Switching from position controller to velocity controller'
-    switch_from_x_y position velocity
-elif [[ ( "$1" == "velocity" && "$2" == "position" ) ]]; then
-    echo 'Switching from velocity controller to position controller'
-    switch_from_x_y velocity position
+if [[ (( $1 == 'trajectory' )) ]] ; then
+    echo $1
+    echo "Switching to trajectory controller"
+    switch_to_traj
+elif [[ (( $1 == 'velocity' || $1 == 'position' )) ]] ; then
+    echo "Switching to ${1} controller"
+    switch_to_pos_or_vel $1
 else
     # warn the user about the fact that he tried to pull from x but he is currently in branch y, therefore doing nothing
     RED='\033[0;31m'
     NC='\033[0m' # No Color
-    printf "${RED}ERROR : option not supported, possible args are: position, velocity and trajectory (choose 2, i.e. trajectory position)${NC}\n"
+    printf "${RED}ERROR : option not supported, possible args are: position, velocity and trajectory${NC}\n"
 fi
