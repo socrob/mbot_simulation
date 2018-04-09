@@ -1,6 +1,12 @@
+# this controller only moves mbot wheels based on cmd_vel topic for visualization purposes
+
+# libridgeback_ros_force_based_move.so moves the robot
+# mbot odometry is not published by this component
+# libgazebo_ros_p3d.so publishes perfect odom
+
 # mbot base velocity controller params, uses custom plugin from ridgeback robot
 # https://github.com/socrob/ridgeback/tree/kinetic/ridgeback_control
-# mbot odometry is published by this component
+
 
 base_velocity_controller:
   type: "mecanum_drive_controller/MecanumDriveController"
@@ -18,7 +24,7 @@ base_velocity_controller:
   wheel_separation_y: 0.35
 
   # Publish a TF based on encoders alone.
-  enable_odom_tf: true
+  enable_odom_tf: false # p3d_base_controller publishes odom tf
 
   # Wheel separation and radius multipliers
   wheel_separation_multiplier: 1.0 # default: 1.0
