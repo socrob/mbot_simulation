@@ -16,10 +16,9 @@
 */
 
 #include <string>
-#include <tf/tf.h>
 #include <stdlib.h>
 
-#include "gazebo_plugins/gazebo_ros_p3d.h"
+#include "mbot_odom_gt/gazebo_ros_p3d.h"
 
 namespace gazebo
 {
@@ -305,6 +304,12 @@ void GazeboRosP3D::UpdateChild()
         this->frame_aeul_ = (this->last_frame_veul_ - frame_veul) / tmp_dt;
         this->last_frame_vpos_ = frame_vpos;
         this->last_frame_veul_ = frame_veul;
+
+        // publish the transform to tf
+        tf::Transform transform;
+        transform.setOrigin(tf::Vector3(pose.Pos().X(), pose.Pos().Y(), pose.Pos().Z()));
+        transform.setRotation(tf::Quaternion(pose.Rot().X(), pose.Rot().Y(), pose.Rot().Z(), pose.Rot().W()));
+        this->tf_br_.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", "base_link" ));
 
         // Fill out messages
         this->pose_msg_.pose.pose.position.x    = pose.Pos().X();

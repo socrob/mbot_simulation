@@ -5,6 +5,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   gazebo_ros
   std_msgs
+  tf
 )
 
 # Depend on system install of Gazebo
@@ -20,6 +21,7 @@ catkin_package(
     roscpp
     gazebo_ros
     std_msgs
+    tf
   LIBRARIES gazebo_ros_p3d
 )
 

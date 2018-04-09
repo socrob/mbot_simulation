@@ -43,6 +43,9 @@
 
 #include <gazebo_plugins/PubQueue.h>
 
+#include <tf/tf.h>
+#include <tf/transform_broadcaster.h>
+
 namespace gazebo
 {
   class GazeboRosP3D : public ModelPlugin
@@ -128,6 +131,9 @@ namespace gazebo
 
     // ros publish multi queue, prevents publish() blocking
     private: PubMultiQueue pmq;
+
+    // to publish odom as tf
+    private: tf::TransformBroadcaster tf_br_;
   };
 }
 #endif
