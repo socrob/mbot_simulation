@@ -68,7 +68,7 @@
 
   <!-- relay the commanded velocity of the robot to be listened by the odom publisher -->
   <node pkg="topic_tools" type="relay" name="cmd_vel_relay"
-        args="cmd_vel velocity_controller/cmd_vel" />
+        args="cmd_vel base_velocity_controller/cmd_vel" />
 
   <!-- 1. subscribe to cmd_head std_msgs/UInt8MultiArray (with position/velocity info)
           and republish to gazebo command topic on the form std_msgs/Float64 (position only) -->
