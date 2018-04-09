@@ -231,8 +231,6 @@ void GazeboRosP3D::UpdateChild()
       (cur_time-this->last_time_).Double() < (1.0/this->update_rate_))
     return;
 
-  if (this->pub_.getNumSubscribers() > 0)
-  {
     // differentiate to get accelerations
     double tmp_dt = cur_time.Double() - this->last_time_.Double();
     if (tmp_dt != 0)
@@ -360,7 +358,6 @@ void GazeboRosP3D::UpdateChild()
 
       // save last time stamp
       this->last_time_ = cur_time;
-    }
   }
 }
 
