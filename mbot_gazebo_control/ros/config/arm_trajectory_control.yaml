@@ -14,7 +14,7 @@ left_arm_traj_controller:
       - left_arm_joint6
 
     gains: # Required because we're controlling an velocity interface
-      left_arm_joint0: {p: &kp_default 1000,  d: &kd_default 5.0, i: &ki_default 2, i_clamp: &ki_clamp_default 2} # & defines 1 time only
+      left_arm_joint0: {p: &kp_default 100,  d: &kd_default 0.1, i: &ki_default 0.0, i_clamp: &ki_clamp_default 1} # & defines 1 time only
       left_arm_joint1: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default} # * uses previously defined in &
       left_arm_joint2: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default} # confused? check: http://yaml.org/spec/current.html#id2502311
       left_arm_joint3: {p: *kp_default,  d: *kd_default, i: *ki_default, i_clamp: *ki_clamp_default}
