@@ -22,8 +22,8 @@ catkin_package(
     gazebo_ros
     std_msgs
     tf
-  LIBRARIES gazebo_ros_p3d
+  LIBRARIES mbot_gazebo_ros_p3d
 )
 
-add_library(gazebo_ros_p3d src/gazebo_ros_p3d.cpp)
-target_link_libraries(gazebo_ros_p3d ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+add_library(mbot_gazebo_ros_p3d src/gazebo_ros_p3d.cpp)
+target_link_libraries(mbot_gazebo_ros_p3d ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
