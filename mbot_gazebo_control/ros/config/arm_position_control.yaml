@@ -3,7 +3,7 @@
 left_arm_joint0_position_controller:
   type: velocity_controllers/JointPositionController
   joint: left_arm_joint0
-  pid: {p: &p_gain 50000.0, i: &i_gain 0.01, d: &d_gain 5.0}
+  pid: {p: &p_gain 500.0, i: &i_gain 0.01, d: &d_gain 5.0}
 
 left_arm_joint1_position_controller:
   type: velocity_controllers/JointPositionController
