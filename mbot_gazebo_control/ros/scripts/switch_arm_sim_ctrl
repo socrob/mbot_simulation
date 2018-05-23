@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# script to easily switch between mbot sim arm controllers (position, velocity and trajectory)
 # args: desired (controller) : position, velocity, trajectory
 
 function switch_to_pos_or_vel()
