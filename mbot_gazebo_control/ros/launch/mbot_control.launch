@@ -62,7 +62,7 @@
     <rosparam file="$(arg ctrl_config_base_path)/arm_trajectory_control.yaml" command="load" />
     <!-- load and start left arm trajectory controller -->
     <node pkg="controller_manager" type="spawner" name="traj_arm_ctrl_spawner"
-          output="screen" args="left_arm_traj_controller" />
+          output="screen" args="sim_left_arm_traj_controller" />
 
   </group> <!-- closes if arm required tag -->
 
@@ -70,5 +70,7 @@
           and republish to gazebo command topic on the form std_msgs/Float64 (position only) -->
   <node pkg="mbot_gazebo_control" type="mbot_head_republisher" name="mbot_head_republisher_node" output="screen" />
 
+  <!-- node to automatically switch between controllers (position, velocity, trajectory) based on what is needed -->
+  <node pkg="mbot_gazebo_control" type="automated_switch_ctrl" name="automated_switch_ctrl_node" output="screen" />
 
 </launch>

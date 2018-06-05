@@ -6,6 +6,8 @@ find_package(catkin REQUIRED
     std_msgs
 )
 
+catkin_python_setup()
+
 include_directories(
   ros/include
   ${catkin_INCLUDE_DIRS}

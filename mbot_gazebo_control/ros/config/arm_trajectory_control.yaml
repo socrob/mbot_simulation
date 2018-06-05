@@ -2,7 +2,7 @@
 
 # joint (actionlib) trajectory controller
 # check http://wiki.ros.org/joint_trajectory_controller
-left_arm_traj_controller:
+sim_left_arm_traj_controller:
     type: velocity_controllers/JointTrajectoryController
     joints:
       - left_arm_joint0
