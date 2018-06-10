@@ -8,6 +8,12 @@
     <arg name="world_name" default="isr-testbed.world" /> <!-- set to "empty.world" for empty world -->
     <arg name="world_path" default="$(find mbot_simulation_environments)/worlds" /> <!-- set to "worlds" empty world -->
 
+    <!-- select start robot pose -->
+    <arg name="robot_pose_x" default="0.5" />
+    <arg name="robot_pose_y" default="0.5" />
+    <arg name="robot_pose_z" default="0.01" />
+    <arg name="robot_pose_yaw" default="0.0" />
+
     <!-- launch robot environment -->
     <include file="$(find mbot_simulation_environments)/launch/load_environment_example.launch" >
         <arg name="world_name" value="$(arg world_name)" />
@@ -43,7 +49,8 @@
 
     <!-- spawn mbot (in a certain position and with a default arm configuration) -->
     <node pkg="gazebo_ros" type="spawn_model" name="mbot_spawner"
-          args="-package_to_model -urdf -model mbot -param robot_description -x 0.5 -y 0.5 -z 0.01
+          args="-package_to_model -urdf -model mbot -param robot_description
+          -x $(arg robot_pose_x) -y $(arg robot_pose_y) -z $(arg robot_pose_z) -Y $(arg robot_pose_yaw)
           -J left_arm_joint0 0.7378
           -J left_arm_joint1 1.4864
           -J left_arm_joint2 0.3175
@@ -51,16 +58,9 @@
           -J left_arm_joint4 0.5062
           -J left_arm_joint5 0.9019
           -J left_arm_joint6 0.5123
-          -J head_link_to_head_camera_link 0.3712" />
+          -J head_link_to_head_camera_link 1.15" />
 
     <!-- gripper interface, to be able to actuate with topic and actionlib -->
     <include file="$(find mbot_gripper_controller_sim)/ros/launch/gripper_interface_sim.launch" />
-
-    <!-- run image proc to rectify image-->
-    <!--node pkg="image_proc" type="image_proc" name="image_rectifier" output="screen" ns="head_camera/rgb" >
-        <remap from="camera_info" to="head_camera/rgb/camera_info" />
-        <remap from="~image" to="head_camera/rgb/image_rect_color" />
-        <remap from="~camera_info" to="head_camera/rgb/camera_info" />
-    </node-->
 
 </launch>
