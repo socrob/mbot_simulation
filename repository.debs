@@ -12,6 +12,8 @@ DISTRO=kinetic
 packagelist=(
     ros-${DISTRO}-gazebo-ros-control
     ros-${DISTRO}-gazebo-plugins
+    ros-${DISTRO}-hector-gazebo
+    ros-${DISTRO}-hector-gazebo-plugins
     ros-${DISTRO}-joint-state-controller
     ros-${DISTRO}-kdl-parser
     ros-${DISTRO}-robot-state-publisher
