@@ -104,10 +104,10 @@ class AutomatedCtrlSwitch(object):
         result = self.client.get_result()
 
         if result.error_code == FollowJointTrajectoryResult.SUCCESSFUL:
-            rospy.loginfo("Server responded with success!!!")
+            rospy.logdebug("Follow joint trajectory server responded with success")
             self.action_server.set_succeeded(result=result, text='success')
         else:
-            rospy.logerr("Moveit server responded with error")
+            rospy.logerr("Follow joint trajectory server responded with error")
             self.action_server.set_aborted(result=result, text='error')
 
 
