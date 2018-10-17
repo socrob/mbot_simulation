@@ -4,6 +4,7 @@ project(mbot_odom_gt)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   gazebo_ros
+  gazebo_plugins
   std_msgs
   tf
 )
