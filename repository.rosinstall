@@ -10,7 +10,3 @@
     local-name: ridgeback
     uri: https://github.com/socrob/ridgeback.git
     version: kinetic
-- git:
-    local-name: ridgeback_simulator
-    uri: https://github.com/socrob/ridgeback_simulator.git
-    version: kinetic
