@@ -26,6 +26,7 @@ packagelist=(
     ros-${DISTRO}-tf-conversions
     ros-${DISTRO}-trajectory-msgs
     ros-${DISTRO}-urdf
+    ros-${DISTRO}-velocity-controllers
     ros-${DISTRO}-visualization-msgs
 )
 
