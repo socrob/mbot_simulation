@@ -15,14 +15,12 @@
   <arg name="ctrl_config_base_path" default="$(find mbot_gazebo_control)/ros/config" />
 
   <!-- load base, neck, head cam and joint state parameters to param server -->
-  <rosparam file="$(arg ctrl_config_base_path)/base_velocity_control.yaml" command="load" />
   <rosparam file="$(arg ctrl_config_base_path)/head_position_control.yaml" command="load" />
   <rosparam file="$(arg ctrl_config_base_path)/joint_state_control.yaml" command="load" />
 
   <!-- spawn base, neck, head cam and joint state controllers -->
   <node pkg="controller_manager" type="spawner" name="basic_ctrl_spawner"
-        output="screen" args="base_velocity_controller
-                              head_position_controller
+        output="screen" args="head_position_controller
                               head_camera_position_controller
                               joint_state_controller" />
 
