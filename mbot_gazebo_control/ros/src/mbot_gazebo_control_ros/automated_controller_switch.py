@@ -67,7 +67,7 @@ class AutomatedCtrlSwitch(object):
         # count to every once in a while read the controller status
         self.count = 0
         # query at node startup which controller is running
-        rospy.wait_for_service('/controller_manager/list_controllers', 10.0)
+        rospy.wait_for_service('/controller_manager/list_controllers', 100.0)
         rospy.logdebug('Service /controller_manager/list_controllers found, proceed')
         self.update_running_ctler()
         # inform user about the active ctrler
